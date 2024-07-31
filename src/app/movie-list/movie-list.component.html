@@ -1,0 +1,20 @@
+<div>
+    <h1>Popular Movies</h1>
+  
+    <input [(ngModel)]="searchTerm" (input)="filterMovies()" placeholder="Search by name">
+    <input [(ngModel)]="minDate" (input)="filterMovies()" type="date" placeholder="Min Date">
+    <input [(ngModel)]="maxDate" (input)="filterMovies()" type="date" placeholder="Max Date">
+  
+    <ul>
+      <li *ngFor="let movie of filteredMovies | paginate: { itemsPerPage: pageSize, currentPage: page }">
+        <img [src]="'https://image.tmdb.org/t/p/original/' + movie.poster_path" alt="Poster" width="100">
+        <h2>{{ movie.title }}</h2>
+        <p><strong>Language:</strong> {{ movie.original_language }}</p>
+        <p><strong>Overview:</strong> {{ movie.overview }}</p>
+        <p><strong>Release Date:</strong> {{ movie.release_date }}</p>
+      </li>
+    </ul>
+  
+    <pagination-controls (pageChange)="page = $event"></pagination-controls>
+  </div>
+  
